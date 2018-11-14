@@ -4,10 +4,17 @@
     "sourceMap": true,
     "noImplicitAny": true,
     "module": "commonjs",
-    "target": "es5",
-    "jsx": "react"
+    "moduleResolution": "node",
+    "allowJs": true,
+    "noEmit": true,
+    "target": "esnext",
+    "jsx": "react",
+    "strict": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "baseUrl": "src"
   },
   "include": [
-    "./src/**/*"
+    "src"
   ]
 }

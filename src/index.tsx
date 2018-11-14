@@ -1,9 +1,11 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React from 'react'
+import { render } from 'react-dom'
 
-import { Hello } from './components/Hello';
+import { Hello } from './components/Hello'
 
-ReactDOM.render(
+const someObject = { bool: true }
+
+render(
   <Hello compiler='TypeScript' framework='React' />,
-  document.getElementById('example')
-);
+  document.getElementById('example'),
+)
