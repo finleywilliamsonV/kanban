@@ -15,6 +15,7 @@
     "no-bitwise": true,
     "no-conditional-assignment": true,
     "no-consecutive-blank-lines": false,
+    "member-access": false,
     "no-console": {
       "severity": "warning",
       "options": [
