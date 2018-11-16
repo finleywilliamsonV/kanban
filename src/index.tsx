@@ -1,9 +1,16 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-import { Hello } from './components/Hello'
+import { App } from './containers/App/App'
 
-render(
-  <Hello compiler='TypeScript' framework='React' />,
+const renderReact = () => render(
+  <App/>,
   document.getElementById('example'),
 )
+
+renderReact()
+
+// Hot Reloading for DEV
+if (module.hot) {
+  module.hot.accept('./containers/App/App', () => renderReact())
+}

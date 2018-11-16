@@ -1,25 +1,85 @@
+const webpack = require('webpack')
+
 const env_dev = process.env.NODE_ENV === 'development'
 
 module.exports = {
-  entry: "./src/index.tsx",
+  entry: './src/index.tsx',
   mode: env_dev ? 'development' : 'production',
   output: {
-    filename: "bundle.js",
-    path: __dirname + "/dist"
+    filename: 'bundle.js',
+    path: __dirname + '/dist'
   },
-
-  // Enable sourcemaps for debugging webpack's output.
   devtool: env_dev ? 'cheap-eval-source-map' : 'source-map',
-
   resolve: {
-    // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: [".ts", ".tsx", ".js", ".json"]
+    extensions: ['.ts', '.tsx', '.js', '.json']
   },
-
   module: {
     rules: [
-      // All files with a '.ts' or '.tsx' extension will be handled by 'babel-loader'.
-      { test: /\.tsx?$/, loader: "babel-loader" },
+      {
+        test: /\.tsx?$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true
+          }
+        }
+      },
+      {
+        test: /\.(sass|s?css)$/,
+        exclude: /src[\\/]assets/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              modules: true,
+              localIdentName: '[path][name]__[local]'
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+        ]
+      },
+      {
+        test: /\.(sass|s?css)$/,
+        include: /src[\\/]assets/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+        ]
+      },
     ]
-  }
+  },
+  devServer: {
+    hot: true,
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
 }
